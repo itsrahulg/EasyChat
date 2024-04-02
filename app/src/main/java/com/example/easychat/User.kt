@@ -6,7 +6,7 @@ class User {
     var phonenumber: String? = null
     var uid: String? = null
 
-    constructor(){
+    constructor() {
 
     }
 
