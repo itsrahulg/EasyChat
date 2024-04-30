@@ -33,10 +33,11 @@
         android:layout_weight="80"
         android:layout_marginLeft="10dp"
         android:paddingLeft="10dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="15dp"
         android:background="@drawable/message_box_background"/>
 
         <ImageView
+            android:id="@+id/sentButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="20"
