@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.adapter = adapter
 
+
         // Check if READ_CONTACTS permission is granted
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -66,7 +67,12 @@ class MainActivity : AppCompatActivity() {
                 userList.clear()
                 for (postSnapshot in snapshot.children) {
                     val currentUser = postSnapshot.getValue(User::class.java)
-                    userList.add(currentUser!!)
+
+                    if(mAuth.currentUser?.uid != currentUser?.uid){
+                        userList.add(currentUser!!)
+                    }
+
+
                 }
                 adapter.notifyDataSetChanged()
             }
@@ -98,3 +104,6 @@ class MainActivity : AppCompatActivity() {
         requestContactsPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
     }
 }
+
+
+

@@ -12,15 +12,10 @@
         android:layout_height="match_parent"
         android:id = "@+id/userRecyclerView"
         tools:listitem="@layout/layout"
-        android:background="@drawable/main_activity_background"/>
+        android:background="@drawable/main_activity_background1"/>
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation_menu" />
+
 
 </RelativeLayout>
 
