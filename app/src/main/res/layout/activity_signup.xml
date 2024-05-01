@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Signup">
+    tools:context=".Signup"
+    android:background="@drawable/login_background1">
 
     <ImageView
         android:id="@+id/signup_image"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:src ="@drawable/logo"
+        android:src ="@drawable/logo_text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-70dp"
+        android:layout_marginTop="-35dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 

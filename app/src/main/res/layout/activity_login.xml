@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:background="@drawable/login_background1">
 
     <ImageView
         android:id="@+id/login_image"
@@ -13,9 +14,9 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="-30dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="10dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo_text"/>
 
     <TextView
         android:layout_width="match_parent"

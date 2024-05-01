@@ -30,17 +30,20 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:hint="Type a message"
-        android:layout_weight="80"
+        android:layout_weight="83"
         android:layout_marginLeft="10dp"
         android:paddingLeft="10dp"
-        android:paddingBottom="15dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/message_box_background"/>
 
         <ImageView
             android:id="@+id/sentButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_weight="20"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/send" />
 
 

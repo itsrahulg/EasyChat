@@ -32,20 +32,60 @@ class MessageAdapter(val context: Context, val messageList: ArrayList<Message>):
         return messageList.size
     }
 
+//    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+//        val currentMessage = messageList[position]
+//        if(holder.javaClass == SentViewHolder::class.java){
+//            //do the stuff for sent view holder
+//            val viewHolder = holder as SentViewHolder
+//            holder.sentMessage.text = currentMessage.message
+//        }else{
+//            //do stuff for receive view holder
+//            val viewHolder = holder as ReceiveViewHolder
+//            holder.receiveMessage.text = currentMessage.message
+//        }
+//    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentMessage = messageList[position]
-        if(holder.javaClass == SentViewHolder::class.java){
-            //do the stuff for sent view holder
 
+        // Determine the type of ViewHolder
+        when (holder) {
+            is SentViewHolder -> {
+                // Set sent message text
+                holder.sentMessage.text = currentMessage.message
+                // Set margin top for the message layout
+                val layoutParams = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
+                if (position == 0) {
+                    // First message
+                    layoutParams.setMargins(layoutParams.leftMargin, 130, layoutParams.rightMargin, layoutParams.bottomMargin)
+                } else {
+                    // Subsequent messages
+                    layoutParams.setMargins(layoutParams.leftMargin, 10, layoutParams.rightMargin, layoutParams.bottomMargin)
+                }
+                holder.itemView.layoutParams = layoutParams
+            }
+            is ReceiveViewHolder -> {
+                // Set received message text
+                //holder.receiveMessage.text = currentMessage.message
 
-            val viewHolder = holder as SentViewHolder
-            holder.sentMessage.text = currentMessage.message
-        }else{
-            //do stuff for receive view holder
-            val viewHolder = holder as ReceiveViewHolder
-            holder.receiveMessage.text = currentMessage.message
+                holder.receiveMessage.text = currentMessage.message
+                // Set margin top for the message layout
+                val layoutParams = holder.itemView.layoutParams as ViewGroup.MarginLayoutParams
+                if (position == 0 || messageList[position - 1].senderId != currentMessage.senderId) {
+                    // First message or first message after sender change
+                    layoutParams.setMargins(layoutParams.leftMargin, 130, layoutParams.rightMargin, layoutParams.bottomMargin)
+                } else {
+                    // Subsequent messages
+                    layoutParams.setMargins(layoutParams.leftMargin, 10, layoutParams.rightMargin, layoutParams.bottomMargin)
+                }
+                holder.itemView.layoutParams = layoutParams
+            }
         }
     }
+
+
+
+
 
     override fun getItemViewType(position: Int): Int {
         val currentMessage = messageList[position]
