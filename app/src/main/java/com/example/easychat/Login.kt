@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 
@@ -13,7 +14,7 @@ class Login : AppCompatActivity() {
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var btnLogin: Button
-    private lateinit var btnSignUp: Button
+    private lateinit var signupLink: TextView
 
     private lateinit var mAuth: FirebaseAuth
 
@@ -30,9 +31,10 @@ class Login : AppCompatActivity() {
         edtPassword = findViewById(R.id.password)
 
         btnLogin = findViewById(R.id.login_button)
-        btnSignUp = findViewById(R.id.signup_button)
+        signupLink = findViewById(R.id.signup_link)
 
-        btnSignUp.setOnClickListener {
+
+        signupLink.setOnClickListener {
             val intent = Intent(this, Signup::class.java)
             startActivity(intent)
         }

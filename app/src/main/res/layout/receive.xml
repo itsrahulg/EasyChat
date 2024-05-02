@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content">-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:background="@drawable/received_text_background"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/txt_receive_message"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="This is received message"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:padding="10dp"-->
+<!--            android:textSize="18sp"/>-->
+<!--        -->
+<!--    </RelativeLayout>-->
+
+<!--</RelativeLayout>-->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -11,6 +36,7 @@
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content">
 
+        <!-- TextView for received message -->
         <TextView
             android:id="@+id/txt_receive_message"
             android:layout_width="wrap_content"
@@ -20,9 +46,20 @@
             android:padding="10dp"
             android:textSize="18sp"/>
 
-
-
-
+        <!-- TextView for received message timestamp -->
+        <TextView
+            android:id="@+id/txt_receive_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_receive_message"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            android:layout_alignStart="@id/txt_receive_message"
+            android:layout_marginTop="-6dp"
+            android:text="Received time"
+            android:textSize="12sp"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

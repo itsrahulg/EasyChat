@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +20,7 @@ class Signup : AppCompatActivity() {
     private lateinit var btnSignUp: Button
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
+    private lateinit var login_Link: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,14 @@ class Signup : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please enter credentials", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        login_Link = findViewById(R.id.login_link)
+
+
+        login_Link.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
         }
     }
 

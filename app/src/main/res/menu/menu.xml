@@ -3,5 +3,5 @@
     <item android:id="@+id/logout" android:title="Logout"/>
     <item android:id="@+id/profile" android:title="Profile"/>
     <item android:id="@+id/about" android:title="about"/>
-    <item android:id="@+id/logout" android:title="Enable dark mode"/>
+    <item android:id="@+id/darkmode" android:title="Enable dark mode"/>
 </menu>

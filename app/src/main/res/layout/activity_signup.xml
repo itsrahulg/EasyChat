@@ -20,28 +20,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/signup_image"
-        android:text="SIGN UP"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="21sp"
-        android:layout_marginTop="-110dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-163dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/signup_image"
-        android:hint="Username"
-        android:padding="8dp"
-        android:background="@drawable/edit_text_background"
-        android:layout_marginTop="-60dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="-128dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Username"
+        android:imeOptions="actionNext"
         android:inputType="text"
-        android:imeOptions="actionNext"/>
+        android:padding="8dp" />
 
     <EditText
         android:id="@+id/email"
@@ -87,14 +87,25 @@
 
     <Button
         android:id="@+id/signup_button"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/password"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="SIGN UP 😍"
+        android:text="Register"
         android:background="@drawable/button_background"
         android:textColor="@color/white"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/login_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signup_button"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:text="Have an account?  Login Here"
+        android:textColor="@color/blue"
         android:textSize="15sp"/>
 
 </RelativeLayout>

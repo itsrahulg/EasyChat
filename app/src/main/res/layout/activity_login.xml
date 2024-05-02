@@ -22,27 +22,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_image"
-        android:text="LOGIN"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="21sp"
-        android:layout_marginTop="-110dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-139dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/login_image"
-        android:layout_marginTop="-60dp"
-        android:hint="Email"
-        android:padding="8dp"
-        android:background="@drawable/edit_text_background"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="-101dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Email"
+        android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
-        android:imeOptions="actionNext"/>
+        android:padding="8dp" />
 
     <EditText
         android:id="@+id/password"
@@ -61,27 +62,39 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/password"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="LOGIN 👋"
+        android:text="LOGIN"
         android:background="@drawable/button_background"
         android:textColor="@color/white"
         android:textSize="15sp"/>
 
-    <Button
-        android:id="@+id/signup_button"
-        android:layout_width="150dp"
+<!--    <Button-->
+<!--        android:id="@+id/signup_button"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/login_button"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:text="SIGN UP 😍"-->
+<!--        android:background="@drawable/button_background"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="15sp"/>-->
+
+    <TextView
+        android:id="@+id/signup_link"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/login_button"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="18dp"
         android:layout_centerHorizontal="true"
-        android:text="SIGN UP 😍"
-        android:background="@drawable/button_background"
-        android:textColor="@color/white"
+        android:text="Don't have an account? Register Here"
+        android:textColor="@color/blue"
         android:textSize="15sp"/>
+
 
 
 

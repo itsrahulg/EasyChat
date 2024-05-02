@@ -1,21 +1,15 @@
 package com.example.easychat
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class ChatActivity : AppCompatActivity() {
 
@@ -26,13 +20,14 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messageList: ArrayList<Message>
     private lateinit var mDbRef: DatabaseReference
 
-    var receiverRoom: String? = null
-    var senderRoom: String? = null
+    private var receiverRoom: String? = null
+    private var senderRoom: String? = null
+    private val currentUserUid: String? = FirebaseAuth.getInstance().currentUser?.uid
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chat)
-
 
         val name = intent.getStringExtra("name")
         val receiverUid = intent.getStringExtra("uid")
@@ -48,45 +43,45 @@ class ChatActivity : AppCompatActivity() {
         messageBox = findViewById(R.id.messageBox)
         sendButton = findViewById(R.id.sentButton)
         messageList = ArrayList()
-        messageAdapter = MessageAdapter(this,messageList)
+        messageAdapter = MessageAdapter(this, messageList)
 
         chatRecyclerView.layoutManager = LinearLayoutManager(this)
         chatRecyclerView.adapter = messageAdapter
 
-        //logic to show the messages in recycler view
+        // Logic to show the messages in the RecyclerView
         mDbRef.child("chats").child(senderRoom!!).child("messages")
-            .addValueEventListener(object:ValueEventListener{
+            .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-
                     messageList.clear()
-
-                    for(postSnapshot in snapshot.children){
+                    for (postSnapshot in snapshot.children) {
                         val message = postSnapshot.getValue(Message::class.java)
-                        messageList.add(message!!)
+                        message?.let { messageList.add(it) }
                     }
                     messageAdapter.notifyDataSetChanged()
+                    chatRecyclerView.scrollToPosition(messageList.size - 1)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
+                    // Handle onCancelled event
                 }
-
             })
 
-        //add the message to the database
-        sendButton.setOnClickListener{
-            val message = messageBox.text.toString()
-            val messageObject = Message(message,senderUid)
+        // Add the message to the database
+        sendButton.setOnClickListener {
+            val messageText = messageBox.text.toString().trim()
+            if (messageText.isNotEmpty()) {
+                val timestamp = System.currentTimeMillis()
+                val messageObject = Message(messageText, currentUserUid, timestamp)
 
-            mDbRef.child("chats").child(senderRoom!!).child("messages").push()
-                .setValue(messageObject).addOnSuccessListener {
-                    mDbRef.child("chats").child(receiverRoom!!).child("messages").push()
-                        .setValue(messageObject)
-                }
-            messageBox.setText("")
-
-
-
+                mDbRef.child("chats").child(senderRoom!!).child("messages").push()
+                    .setValue(messageObject).addOnSuccessListener {
+                        mDbRef.child("chats").child(receiverRoom!!).child("messages").push()
+                            .setValue(messageObject)
+                    }
+                messageBox.setText("")
+            }
         }
+
+
     }
 }
