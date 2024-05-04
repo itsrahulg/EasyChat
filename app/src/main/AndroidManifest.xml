@@ -29,8 +29,7 @@
 
         <activity
             android:name=".ChatActivity"
-            android:exported="false"/>
-<!--            android:windowSoftInputMode="adjustResize"-->
+            android:exported="false" />
 
         <activity
             android:name=".IntroScreen"
@@ -48,7 +47,7 @@
         </activity>
         <activity
             android:name=".Signup"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

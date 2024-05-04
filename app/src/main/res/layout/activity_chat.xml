@@ -5,14 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_above="@+id/linearLayout"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@drawable/chatactivitybackground"/>
 
     <LinearLayout
         android:id="@id/linearLayout"
@@ -28,7 +30,7 @@
             android:id="@+id/messageBox"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_weight="85"
+            android:layout_weight="95"
             android:hint="Type a message"
             android:paddingBottom="5dp"
             android:paddingLeft="15dp"
@@ -38,12 +40,11 @@
 
         <ImageView
             android:id="@+id/sentButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="20"
-            android:layout_marginRight="9dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/send" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="10"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/sendmessageicon" />
 
     </LinearLayout>
 </RelativeLayout>
