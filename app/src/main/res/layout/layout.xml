@@ -23,6 +23,14 @@
         android:layout_marginTop="-10dp"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/txt_latest_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:padding="10dp"
+        android:textSize="15sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

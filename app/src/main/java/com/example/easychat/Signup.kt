@@ -54,6 +54,7 @@ class Signup : AppCompatActivity() {
 
         login_Link.setOnClickListener {
             val intent = Intent(this, Login::class.java)
+            finish()
             startActivity(intent)
         }
     }
