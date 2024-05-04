@@ -6,16 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Search Bar -->
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:hint="Search"
+        android:paddingLeft="12dp"
+        android:background="@drawable/search_background"
+        android:drawablePadding="8dp"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
+        android:layout_marginHorizontal="16dp"
+        android:layout_alignParentTop="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/userRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id = "@+id/userRecyclerView"
-        tools:listitem="@layout/layout"
-        android:background="@drawable/main_activity_background1"/>
-
-
-
+        android:layout_below="@id/searchEditText"
+        tools:listitem="@layout/layout"/>
 
 </RelativeLayout>
-

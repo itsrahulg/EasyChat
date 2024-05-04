@@ -11,17 +11,9 @@
         android:layout_height="wrap_content"
         android:text="name"
         android:padding="10dp"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txt_phone_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:padding="10dp"
-        android:layout_marginTop="-10dp"
-        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/txt_latest_chat"

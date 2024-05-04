@@ -1,7 +1,5 @@
 package com.example.easychat
 
-
-
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -20,12 +18,12 @@ import com.google.firebase.auth.FirebaseAuth
 class UserAdapter(val context: Context, val userList: ArrayList<User>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-    private val contactNumbers: HashSet<String> by lazy {
-        fetchContactNumbers()
+    private val contactsMap: HashMap<String, String> by lazy {
+        fetchContacts()
     }
 
-    private fun fetchContactNumbers(): HashSet<String> {
-        val contactNumbers = HashSet<String>()
+    private fun fetchContacts(): HashMap<String, String> {
+        val contactsMap = HashMap<String, String>()
         if (ContextCompat.checkSelfPermission(
                 context,
                 Manifest.permission.READ_CONTACTS
@@ -33,7 +31,10 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>) :
         ) {
             val cursor = context.contentResolver.query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
+                arrayOf(
+                    ContactsContract.CommonDataKinds.Phone.NUMBER,
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                ),
                 null,
                 null,
                 null
@@ -42,11 +43,14 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>) :
                 while (it.moveToNext()) {
                     val phoneNumberIndex =
                         it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                    val displayNameIndex =
+                        it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
                     val phoneNumber =
                         it.getString(phoneNumberIndex)?.replace("\\s".toRegex(), "") // Remove whitespace
+                    val displayName = it.getString(displayNameIndex)
                     phoneNumber?.let { number ->
                         val normalizedNumber = normalizePhoneNumber(number)
-                        contactNumbers.add(normalizedNumber)
+                        contactsMap[normalizedNumber] = displayName
                     }
                 }
             }
@@ -58,7 +62,7 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>) :
                 REQUEST_CONTACTS_PERMISSION
             )
         }
-        return contactNumbers
+        return contactsMap
     }
 
     // Function to normalize a phone number
@@ -82,38 +86,45 @@ class UserAdapter(val context: Context, val userList: ArrayList<User>) :
 
         // Normalize the phone number for comparison
         val normalizedPhoneNumber = normalizePhoneNumber(currentUser.phonenumber ?: "")
-        if (contactNumbers.contains(normalizedPhoneNumber)) {
-            holder.textName.text = currentUser.name
-            holder.textPhoneNumber.text = currentUser.phonenumber
+        if (contactsMap.containsKey(normalizedPhoneNumber)) {
+            val displayName = contactsMap[normalizedPhoneNumber]
+            holder.textName.text = displayName
+
         } else {
             // Hide view if not found in contacts
             holder.itemView.visibility = View.GONE
             holder.itemView.layoutParams =
                 RecyclerView.LayoutParams(0, 0)
+            return
         }
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(context,ChatActivity::class.java)
+            val intent = Intent(context, ChatActivity::class.java)
 
-            intent.putExtra("name",currentUser.name)
-            intent.putExtra("uid",currentUser.uid)
+            // Retrieve the display name again as it may be null in some cases
+            val displayName = contactsMap[normalizedPhoneNumber]
+            intent.putExtra("name", displayName)
+            intent.putExtra("uid", currentUser.uid)
             context.startActivity(intent)
         }
+
+
     }
+    fun updateList(newList: List<User>) {
+        userList.clear()
+        userList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textName = itemView.findViewById<TextView>(R.id.txt_name)
-        val textPhoneNumber = itemView.findViewById<TextView>(R.id.txt_phone_number)
+
     }
 
     companion object {
         private const val REQUEST_CONTACTS_PERMISSION = 123
     }
 }
-
-
-
-
-
 
 
