@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChatActivity"
-    >
+    android:background="@drawable/chatactivitybackground">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
@@ -14,37 +16,49 @@
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/chatactivitybackground"/>
+        />
 
     <LinearLayout
-        android:id="@id/linearLayout"
+        android:id="@+id/linearLayout"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:weightSum="100">
 
+        <!-- EditText with floating effect -->
         <EditText
             android:id="@+id/messageBox"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="95"
+            android:layout_height="50dp"
+            android:layout_weight="100"
+            android:background="@drawable/message_box_background"
             android:hint="Type a message"
-            android:paddingBottom="5dp"
-            android:paddingLeft="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/message_box_background"/>
+            android:padding="10dp"
+            android:elevation="6dp"
+            android:layout_margin="10dp"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideInset"
+            android:overScrollMode="always"
+            android:importantForAccessibility="yes"
+            android:textColor="@color/black"
 
+        />
+
+        <!-- Send button -->
         <ImageView
             android:id="@+id/sentButton"
             android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="10"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/sendmessageicon" />
+            android:src="@drawable/sendbutton" />
 
     </LinearLayout>
 </RelativeLayout>
+
