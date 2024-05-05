@@ -14,7 +14,6 @@ import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.common.reflect.TypeToken
@@ -161,16 +160,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.logout) {
-            //logic for logout
-            mAuth.signOut()
-            val intent = Intent(this@MainActivity, Login::class.java)
-            finish()
-            startActivity(intent)
-            return true
+        when (item.itemId) {
+            R.id.logout -> {
+                //logic for logout
+                mAuth.signOut()
+                val intent = Intent(this@MainActivity, Login::class.java)
+                finish()
+                startActivity(intent)
+                return true
+            }
+            R.id.profile -> {
+                val intent = Intent(this@MainActivity, Profile::class.java)
+                startActivity(intent)
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     private fun requestContactsPermission() {
         requestContactsPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
