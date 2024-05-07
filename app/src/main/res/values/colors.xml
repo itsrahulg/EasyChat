@@ -6,4 +6,5 @@
     <color name="blue">#1A6A9F</color>
     <color name="sent_text_color">#7BC9FF</color>
     <color name="received_text_color">#10439F</color>
+    <color name="choosefromgallery">#73C4FA</color>
 </resources>

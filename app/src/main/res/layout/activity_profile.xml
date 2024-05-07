@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/profile_image"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:src="@drawable/default_profile_image"
@@ -16,59 +16,90 @@
 
     <Button
         android:id="@+id/change_photo_button"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Choose from gallery">
+        android:text="Choose from gallery"
+        android:background="@drawable/profilebuttons"
+        android:textSize="12sp">
 
     </Button>
 
-
-    <EditText
-        android:id="@+id/bio_edit_text"
+    <TextView
+        android:id="@+id/usernameLabel"
+        android:layout_below="@id/change_photo_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/change_photo_button"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:text="Username:"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginRight="20dp"
-        android:hint="Enter your bio"
-        android:padding="10dp" >
+        android:textSize="20sp">
+    </TextView>
 
-    </EditText>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/usernamevalue"
+        android:layout_below="@id/usernameLabel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/bio_edit_text"
-        android:gravity="center"
-        android:layout_centerHorizontal="true">
+        android:text=""
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17sp">
+    </TextView>
 
-        <Button
-            android:id="@+id/edit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Edit"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp" >
+    <TextView
+        android:id="@+id/emailidLabel"
+        android:layout_below="@id/usernamevalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email-Id:"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="20dp"
+        android:textSize="20sp">
+    </TextView>
 
-        </Button>
+    <TextView
+        android:id="@+id/emailidvalue"
+        android:layout_below="@id/emailidLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17sp">
+    </TextView>
 
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Save"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp" >
+    <TextView
+        android:id="@+id/phonenumberLabel"
+        android:layout_below="@id/emailidvalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone Number:"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="20dp"
+        android:textSize="20sp">
+    </TextView>
 
-        </Button>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/phonenumbervalue"
+        android:layout_below="@id/phonenumberLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17sp">
+    </TextView>
+
+
 
 
 

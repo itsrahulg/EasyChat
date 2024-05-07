@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/logout" android:title="Logout"/>
     <item android:id="@+id/profile" android:title="Profile"/>
-    <item android:id="@+id/about" android:title="about"/>
-    <item android:id="@+id/darkmode" android:title="Enable dark mode"/>
+    <item android:id="@+id/about" android:title="About"/>
+    <item android:id="@+id/darkmode" android:title="Dark mode"/>
+    <item android:id="@+id/logout" android:title="Logout"/>
 </menu>
