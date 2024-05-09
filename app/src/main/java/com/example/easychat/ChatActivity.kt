@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ChatActivity : AppCompatActivity() {
 
@@ -24,10 +26,15 @@ class ChatActivity : AppCompatActivity() {
     private var senderRoom: String? = null
     private val currentUserUid: String? = FirebaseAuth.getInstance().currentUser?.uid
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_chat)
+
+
 
         val name = intent.getStringExtra("name")
         val receiverUid = intent.getStringExtra("uid")
@@ -47,6 +54,7 @@ class ChatActivity : AppCompatActivity() {
 
         chatRecyclerView.layoutManager = LinearLayoutManager(this)
         chatRecyclerView.adapter = messageAdapter
+
 
         // Logic to show the messages in the RecyclerView
         mDbRef.child("chats").child(senderRoom!!).child("messages")

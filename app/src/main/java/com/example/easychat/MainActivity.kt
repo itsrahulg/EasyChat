@@ -154,6 +154,9 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences.edit().putString("cached_contacts", contactsJson).apply()
     }
 
+
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
@@ -183,3 +186,7 @@ class MainActivity : AppCompatActivity() {
         requestContactsPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
     }
 }
+
+
+
+
