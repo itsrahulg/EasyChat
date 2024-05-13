@@ -1,66 +1,110 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background1">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/profilebackground">
 
-    <ImageView
+
+    <!-- XML layout for circular ImageView -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="80dp"
         android:id="@+id/profile_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/default_profile_image"
-        android:contentDescription="TODO">
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:background = "@drawable/profile"
+        android:layout_centerHorizontal="true" />
 
-    </ImageView>
 
-    <Button
-        android:id="@+id/change_photo_button"
-        android:layout_width="170dp"
+    <LinearLayout
+        android:id="@+id/dp_buttons"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Choose from gallery"
-        android:background="@drawable/profilebuttons"
-        android:textSize="12sp">
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
 
-    </Button>
+        <Button
+            android:id="@+id/change_photo_button"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Choose from gallery"
+            android:background="@drawable/profilebuttons"
+            android:textSize="12sp">
+        </Button>
+
+        <Button
+            android:id="@+id/delete_photo_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="delete"
+            android:background="@drawable/profilebuttons"
+            android:textSize="12sp">
+        </Button>
+
+
+
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/usernameLabel"
-        android:layout_below="@id/change_photo_button"
+        android:layout_below="@id/dp_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Username:"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="20dp"
-        android:textSize="20sp">
+        android:textSize="20sp"
+        android:textColor="@color/black">
     </TextView>
 
-    <TextView
-        android:id="@+id/usernamevalue"
+    <LinearLayout
+        android:id="@+id/usernameedit"
         android:layout_below="@id/usernameLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="20dp"
-        android:textSize="17sp">
-    </TextView>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/usernamevalue"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="20dp"
+            android:textSize="17sp">
+        </TextView>
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/pencil">
+        </Button>
+
+
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/emailidLabel"
-        android:layout_below="@id/usernamevalue"
+        android:layout_below="@id/usernameedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Email-Id:"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="20dp"
-        android:textSize="20sp">
+        android:textSize="20sp"
+        android:textColor="@color/black">
     </TextView>
 
     <TextView
@@ -84,7 +128,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="20dp"
-        android:textSize="20sp">
+        android:textSize="20sp"
+        android:textColor="@color/black">
     </TextView>
 
     <TextView
