@@ -17,13 +17,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.gson.Gson
 
 class Profile : AppCompatActivity() {
 
@@ -34,12 +30,6 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
-        //deleting a photo
-        val deletePhotoButton: Button = findViewById(R.id.delete_photo_button)
-        deletePhotoButton.setOnClickListener {
-            deleteProfilePhoto()
-        }
-
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("ProfilePrefs", Context.MODE_PRIVATE)
@@ -85,7 +75,8 @@ class Profile : AppCompatActivity() {
 
     private fun uploadImageToFirebaseStorage() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
-        val storageRef = FirebaseStorage.getInstance().reference.child("profile_images").child("$userId.jpg")
+        val storageRef =
+            FirebaseStorage.getInstance().reference.child("profile_images").child("$userId.jpg")
 
         storageRef.putFile(profileImageUri)
             .addOnSuccessListener {
@@ -104,6 +95,7 @@ class Profile : AppCompatActivity() {
                 Toast.makeText(this, "Failed to upload profile photo", Toast.LENGTH_SHORT).show()
             }
     }
+
     private fun saveImageUriToSharedPreferences(uri: Uri) {
         val editor = sharedPreferences.edit()
         editor.putString("profileImageUri", uri.toString())
@@ -121,31 +113,51 @@ class Profile : AppCompatActivity() {
             }
     }
 
+
     private fun retrieveUserData() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         val userRef = FirebaseDatabase.getInstance().reference.child("user").child(userId!!)
-        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    val username = dataSnapshot.child("name").getValue(String::class.java)
-                    val email = dataSnapshot.child("email").getValue(String::class.java)
-                    val phoneNumber = dataSnapshot.child("phonenumber").getValue(String::class.java)
+        val cachedUserData = sharedPreferences.getString("userData", null)
 
-                    // Update TextViews with retrieved data
-                    findViewById<TextView>(R.id.usernamevalue).text = username
-                    findViewById<TextView>(R.id.emailidvalue).text = email
-                    findViewById<TextView>(R.id.phonenumbervalue).text = phoneNumber
-                } else {
-                    // User node does not exist
+        if (cachedUserData != null) {
+            // If user data is cached, retrieve from cache and update UI
+            val userData = Gson().fromJson<UserData>(cachedUserData, UserData::class.java)
+            updateUI(userData)
+        } else {
+            // If user data is not cached, fetch from database
+            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        val username = dataSnapshot.child("name").getValue(String::class.java)
+                        val email = dataSnapshot.child("email").getValue(String::class.java)
+                        val phoneNumber = dataSnapshot.child("phonenumber").getValue(String::class.java)
+
+                        // Cache user data
+                        val userData = UserData(username, email, phoneNumber)
+                        val userDataJson = Gson().toJson(userData)
+                        sharedPreferences.edit().putString("userData", userDataJson).apply()
+
+                        // Update TextViews with retrieved data
+                        updateUI(userData)
+                    } else {
+                        // User node does not exist
+                    }
                 }
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Handle failure
-            }
-        })
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle failure
+                }
+            })
+        }
     }
 
+    private fun updateUI(userData: UserData) {
+        findViewById<TextView>(R.id.usernamevalue).text = userData.username
+        findViewById<TextView>(R.id.emailidvalue).text = userData.email
+        findViewById<TextView>(R.id.phonenumbervalue).text = userData.phoneNumber
+    }
+
+    data class UserData(val username: String?, val email: String?, val phoneNumber: String?)
 
 
     private fun loadProfileImage(profileImageView: ImageView) {
@@ -154,77 +166,32 @@ class Profile : AppCompatActivity() {
             profileImageUri = Uri.parse(uriString)
             Glide.with(this /* context */)
                 .load(profileImageUri)
-                .placeholder(R.drawable.default_profile_image)
-                .error(R.drawable.default_profile_image)
+                .placeholder(R.drawable.profile)
+                .error(R.drawable.profile)
                 .into(profileImageView)
         } else {
             // Load default profile image or set default placeholder
             profileImageView.setImageResource(R.drawable.profile)
         }
     }
-
-
-    //deleting photo logic
-    private fun deleteProfilePhoto() {
-        // Get current user
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        currentUser?.let { user ->
-            // Get user ID
-            val userId = user.uid
-
-            // Remove image from Firebase Storage
-            val storageRef = FirebaseStorage.getInstance().reference
-                .child("profile_images")
-                .child("$userId.jpg")
-
-            storageRef.delete()
-                .addOnSuccessListener {
-                    // Image deleted successfully from Firebase Storage
-
-                    // Remove image URL from Firestore
-                    val userRef = FirebaseFirestore.getInstance().collection("users")
-                        .document(userId)
-                    userRef.update("profileImageUrl", FieldValue.delete())
-                        .addOnSuccessListener {
-                            // Image URL deleted successfully from Firestore
-                            Toast.makeText(this, "Profile photo deleted", Toast.LENGTH_SHORT).show()
-
-                            // Clear Glide cache
-                            Glide.get(applicationContext).clearMemory()
-                            CoroutineScope(Dispatchers.IO).launch {
-                                Glide.get(applicationContext).clearDiskCache()
-                            }
-
-                            // Clear SharedPreferences
-                            val editor = sharedPreferences.edit()
-                            editor.remove("profileImageUri")
-                            editor.apply()
-
-                            // Update ImageView with default image
-                            val profileImageView: CircleImageView = findViewById(R.id.profile_image)
-                            profileImageView.setImageResource(R.drawable.profile)
-                        }
-                        .addOnFailureListener { e ->
-                            // Handle failure to delete image URL from Firestore
-                            Toast.makeText(this, "Failed to delete profile photo: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
-                .addOnFailureListener { e ->
-                    // Handle failure to delete image from Firebase Storage
-                    Toast.makeText(this, "Failed to delete profile photo: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-        } ?: run {
-            // Current user is null
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
-        }
+    override fun onResume() {
+        super.onResume()
+        // Reload profile image if exists
+        val profileImageView: ImageView = findViewById(R.id.profile_image)
+        loadProfileImage(profileImageView)
     }
-
-
-
 
 
     companion object {
         private const val PICK_IMAGE_REQUEST = 1
     }
+
 }
+
+
+
+
+
+
+
 

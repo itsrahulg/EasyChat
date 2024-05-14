@@ -5,54 +5,40 @@
     android:background="@drawable/profilebackground">
 
 
+
     <!-- XML layout for circular ImageView -->
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_marginTop="80dp"
         android:id="@+id/profile_image"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:background = "@drawable/profile"
-        android:layout_centerHorizontal="true" />
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/profile"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"/>
 
 
-    <LinearLayout
-        android:id="@+id/dp_buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profile_image"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true">
 
-        <Button
+
+
+    <Button
             android:id="@+id/change_photo_button"
             android:layout_width="170dp"
+            android:layout_below="@id/profile_image"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:text="Choose from gallery"
-            android:background="@drawable/profilebuttons"
-            android:textSize="12sp">
-        </Button>
-
-        <Button
-            android:id="@+id/delete_photo_button"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="delete"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/profilebuttons"
             android:textSize="12sp">
         </Button>
 
 
-
-
-    </LinearLayout>
 
 
     <TextView
         android:id="@+id/usernameLabel"
-        android:layout_below="@id/dp_buttons"
+        android:layout_below="@id/change_photo_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Username:"

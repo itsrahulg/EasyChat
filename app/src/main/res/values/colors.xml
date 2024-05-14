@@ -7,4 +7,5 @@
     <color name="sent_text_color">#7BC9FF</color>
     <color name="received_text_color">#10439F</color>
     <color name="choosefromgallery">#73C4FA</color>
+    <color name="main_activity_background_color">#F4F6F6</color>
 </resources>

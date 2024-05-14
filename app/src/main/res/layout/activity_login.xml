@@ -72,17 +72,6 @@
         android:textColor="@color/white"
         android:textSize="15sp"/>
 
-<!--    <Button-->
-<!--        android:id="@+id/signup_button"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/login_button"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:text="SIGN UP 😍"-->
-<!--        android:background="@drawable/button_background"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="15sp"/>-->
 
     <TextView
         android:id="@+id/signup_link"
@@ -94,9 +83,5 @@
         android:text="Don't have an account? Register Here"
         android:textColor="@color/blue"
         android:textSize="15sp"/>
-
-
-
-
 
 </RelativeLayout>
